@@ -1,6 +1,37 @@
 pipeline {
     agent any
     stages {
+        stage("Checkout") {
+            steps {
+                checkout poll: false, scm: [
+                    $class: 'GitSCM', 
+                    branches: [
+                        [
+                            name: '*/master'
+                        ]
+                    ], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [
+                        [
+                            $class: 'CloneOption', 
+                            depth: 10, 
+                            honorRefspec: true, 
+                            noTags: false, 
+                            reference: '', 
+                            shallow: true
+                        ]
+                    ], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [
+                        [
+                            credentialsId: 'ci-proxy-git-plugin', 
+                            url: 'git@github.com:mercadolibre/fury_ci-proxy.git'
+                        ]
+                    ]
+                ]
+
+            }
+        }
         stage("Test") {
             steps {
                 echo "This is a test!"
