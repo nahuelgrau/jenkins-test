@@ -25,7 +25,7 @@ pipeline {
                     userRemoteConfigs: [
                         [
                             credentialsId: 'ci-proxy-git-plugin', 
-                            url: 'git@github.com:mercadolibre/fury_ci-proxy.git'
+                            url: 'https://github.com/mercadolibre/fury_ci-proxy.git'
                         ]
                     ]
                 ]
